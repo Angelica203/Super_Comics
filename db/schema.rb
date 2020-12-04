@@ -11,16 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201201041917) do
+ActiveRecord::Schema.define(version: 20201203150312) do
 
   create_table "comics", force: :cascade do |t|
-    t.integer "user_id"
     t.string  "title"
-    t.integer "published_date"
-    t.string  "summary"
+    t.integer "published"
     t.string  "author"
     t.string  "illustrator"
-    t.string  "image_url"
+    t.text    "summary"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
