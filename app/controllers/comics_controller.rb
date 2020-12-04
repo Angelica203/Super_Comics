@@ -1,20 +1,22 @@
 class ComicsController < ApplicationController
 
     get '/comics' do
-        binding.pry
-        @comics = Comics.all
-        erb :index
+        @comics = Comic.all
+        erb :'comics/index'
     #get all of the comics
     end
 
     get '/comics/new' do
         #new
     #get form to create new comics
+        erb :'comics/new'
     end
 
     post '/comics' do
         #create(backend)
     #create a new comicbook and redirect
+    comic = Comic.create(params[:comic])
+    redirect to "/comics/#{comic.id}"
     end
 
     get '/comics/:id' do
