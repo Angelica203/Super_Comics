@@ -1,3 +1,4 @@
 <ul><% @comics.each do |c|%>
-<li><%= c.name %></li>
+<li><a href="/comics/<%=c.id%>"><%= c.title %></a></li>
 <% end %><ul>
+

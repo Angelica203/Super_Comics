@@ -1,0 +1,14 @@
+Editing <%= @comic.title %><br><br>
+<form method="POST" action="/comics/<%= @comic.id %>">
+        <input type="hidden" name="_method" value="PATCH">
+        <label>Comic Title:</label>
+        <input type="text" name="comic[title]" value="<%= @comic.title %>">
+        <lable>Comic published:</lable>
+        <input type="text" name="comic[published]" value="<%= @comic.published %>">
+        <lable>Comic Summary:</lable>
+        <input type="text" name="comic[summary]" value="<%= @comic.summary %>">
+        <lable>Comic Author:</lable>
+        <input type="text" name="comic[author]" value="<%= @comic.author %>">
+
+        <input type="submit" value="Create Comic">
+     </form>

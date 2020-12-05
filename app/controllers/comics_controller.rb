@@ -21,17 +21,28 @@ class ComicsController < ApplicationController
 
     get '/comics/:id' do
         #show
-    #show one specific comic
+        #show one specific comic
+        @comic = Comic.find_by_id(params[:id])
+        erb :'comics/show'
     end
 
     get '/comics/:id/edit' do
+                # binding.pry
         #edit()
         #get the comic to edit the comic
+        @comic = Comic.find_by_id(params[:id])
+        erb :'comics/edit'
     end
 
     patch '/comics/:id' do
+        # binding.pry
         #update
         #update the single comic
+        # comic = Comic.find_by_id(params[:id])
+        # redirect to
+        comic = Comic.find_by_id(params[:id])
+        comic.update(params[:comic])
+        redirect to "/comics/#{comic.id}"
     end
 
     delete '/comics/:id' do

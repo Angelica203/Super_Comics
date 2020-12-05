@@ -1,9 +1,13 @@
 Create a New Comic:<br>
-<form method="POST" action="/comics">
-    <input type="hidden" name="comic[user_id]" value="<%= current_user.id %>">
-    <label>Comic Name</label>
-    <input type="text" name="comic[name]">
-    <lable>Comic Summary</lable>
-    <input type="text" name="comic[summary]">
-    <input type="submit" value="Create Comic">
- </form>
+    <form method="POST" action="/comics">
+        <label>Comic Title:</label>
+        <input type="text" name="comic[title]">
+        <lable>Comic published:</lable>
+        <input type="text" name="comic[published]">
+        <lable>Comic Summary:</lable>
+        <input type="text" name="comic[summary]">
+        <lable>Comic Author:</lable>
+        <input type="text" name="comic[author]">
+
+        <input type="submit" value="Create Comic">
+     </form>
