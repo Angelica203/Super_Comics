@@ -4,4 +4,8 @@ Author: <%= @comic.author %><br>
 Illustrator: <%= @comic.illustrator %><br>
 Summary: <%= @comic.summary %><br>
 <a href="/comics/<%= @comic.id %>/edit">Edit Comic</a>
+<form method="POST" action="/comics/<%= @comic.id %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete comic">
+</form>    
 

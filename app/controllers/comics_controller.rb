@@ -9,12 +9,14 @@ class ComicsController < ApplicationController
     get '/comics/new' do
         #new
     #get form to create new comics
+        redirect_if_not_logged_in
         erb :'comics/new'
     end
 
     post '/comics' do
         #create(backend)
     #create a new comicbook and redirect
+    redirect_if_not_logged_in
     comic = Comic.create(params[:comic])
     redirect to "/comics/#{comic.id}"
     end
@@ -27,7 +29,6 @@ class ComicsController < ApplicationController
     end
 
     get '/comics/:id/edit' do
-                # binding.pry
         #edit()
         #get the comic to edit the comic
         @comic = Comic.find_by_id(params[:id])
@@ -35,11 +36,11 @@ class ComicsController < ApplicationController
     end
 
     patch '/comics/:id' do
-        # binding.pry
         #update
         #update the single comic
         # comic = Comic.find_by_id(params[:id])
         # redirect to
+        redirect_if_not_logged_in
         comic = Comic.find_by_id(params[:id])
         comic.update(params[:comic])
         redirect to "/comics/#{comic.id}"
@@ -48,5 +49,9 @@ class ComicsController < ApplicationController
     delete '/comics/:id' do
         #delete or destroy
         #destroy the single comic
+        redirect_if_not_logged_in
+        comic = Comic.find_by_id(params[:id])
+        comic.destroy
+        redirect to '/comics'
     end
 end
