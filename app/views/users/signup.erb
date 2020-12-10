@@ -1,13 +1,13 @@
-<h1>Sign Up</h1>
+<h1>Sign Up Here</h1>
 <% if @errors %>
     <% @errors.each do |e| %>
-       <%= e %><br>
+        <%= e %><br>
     <% end %>
 <% end %>
 
-<form mehtod= "POST" action="/signup">
+<form method="POST" action="/signup">
 Username: <input type="text" name="user[username]" required><br>
-Email: <input type="email" name="user[email]" required><br>
-Password: <input type="password" name="user[password]"required>
+Email: <input type="email" name="user[email]" required ><br>
+Password: <input type="password" name="user[password]" required>
 <input type="submit" value="Create User">
 </form>

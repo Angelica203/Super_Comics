@@ -14,10 +14,13 @@ class ComicsController < ApplicationController
     end
 
     post '/comics' do
+        binding.pry
         #create(backend)
     #create a new comicbook and redirect
     redirect_if_not_logged_in
-    comic = Comic.create(params[:comic])
+    comic = Comic.new(params[:comic])
+    comic.user_id=current_user.id
+    comic.save
     redirect to "/comics/#{comic.id}"
     end
 

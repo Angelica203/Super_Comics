@@ -5,9 +5,10 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
+        # user = User.create(params[:user])
+        # redirect to "/users/#{user.id}"
         user = User.new(params[:user])
         if user.save
-            session[:user_id] = user.id
             redirect to "/users/#{user.id}"
         else
             @errors = user.errors.full_messages
@@ -15,8 +16,26 @@ class UsersController < ApplicationController
         end
     end
 
-    get '/signin' do
-        erb :'users/signin'
+        get '/signin' do
+             erb :'users/signin'
+        end
+ 
+        post '/signin' do
+            !params[:user][:username].blank? ? user = User.find_by_username(params[:user][:username]) : user = User.find_by_email(params[:user][:email])
+            if user && user.authenticate(params[:user][:password])
+                session[:user_id] = user.id
+                redirect to "/users/#{user.id}"
+            else
+                flash[:message] = "Invalid Credentials. Please try again."
+                redirect to '/signin'
+            end
+        end
+
+    get '/users/:id' do
+        binding.pry
+        @user = User.find_by_id(params[:id])
+        @comics = @user.comics
+        erb :'users/show'
     end
 
     get '/logout' do
@@ -24,20 +43,7 @@ class UsersController < ApplicationController
         redirect to '/signin'
     end
 
-    post '/signin'do
-        !params[:user][:username].blank? ? user = User.find_by_username(params[:user][:username]) : user = User.find_by_email(params[:user][:email])
-        if user && user.authenticate(params[:user][:password])
-            session[:user_id] = user.id
-            redirect to "/users/#{user.id}"
-        else
-            flash[:message] = "Login unsuccessful. Please try again."
-            redirect to '/signin'
-        end
-    end
-
-    get '/users/:id' do
-        @user = User.find_by_id(params[:id])
-        @comics = @user.comics
-        erb :'users/show'
-    end
 end
+
+
+# 

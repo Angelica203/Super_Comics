@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-    <html>
-      <head>
+<html>
+    <head>
         <title>SuperHeros</title>
         <meta Charset="UTF-8">
-      </head>
+        <link rel="stylesheet" href="/stylesheets/main.css" type="text/css"/>
+      
+     </head>
      <body>
+        <% if logged_in? %>
+          <a href="/logout">Log out</a>
+          <a href="/users/<%=current_user.id%>">Home</a>
+        <% end %>
         <h1>Super Comics</h1>
         <%= yield %>
      </body>
-    </html>
+  </html>
