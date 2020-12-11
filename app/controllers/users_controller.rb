@@ -5,8 +5,6 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        # user = User.create(params[:user])
-        # redirect to "/users/#{user.id}"
         user = User.new(params[:user])
         if user.save
             redirect to "/users/#{user.id}"
@@ -32,15 +30,14 @@ class UsersController < ApplicationController
         end
 
     get '/users/:id' do
-        binding.pry
         @user = User.find_by_id(params[:id])
         @comics = @user.comics
-        erb :'users/show'
+        erb :'users/home'
     end
 
     get '/logout' do
         session.clear
-        redirect to '/signin'
+        redirect to '/'
     end
 
 end

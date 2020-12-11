@@ -9,12 +9,11 @@ class ComicsController < ApplicationController
     get '/comics/new' do
         #new
     #get form to create new comics
-        redirect_if_not_logged_in
+        # redirect_if_not_logged_in
         erb :'comics/new'
     end
 
     post '/comics' do
-        binding.pry
         #create(backend)
     #create a new comicbook and redirect
     redirect_if_not_logged_in
