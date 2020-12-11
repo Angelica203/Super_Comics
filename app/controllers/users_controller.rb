@@ -14,25 +14,29 @@ class UsersController < ApplicationController
         end
     end
 
-        get '/signin' do
-             erb :'users/signin'
-        end
+    get '/signin' do
+         erb :'users/signin'
+    end
  
-        post '/signin' do
-            !params[:user][:username].blank? ? user = User.find_by_username(params[:user][:username]) : user = User.find_by_email(params[:user][:email])
-            if user && user.authenticate(params[:user][:password])
-                session[:user_id] = user.id
-                redirect to "/users/#{user.id}"
-            else
-                flash[:message] = "Invalid Credentials. Please try again."
-                redirect to '/signin'
-            end
-        end
+    post '/signin' do
+        !params[:user][:username].blank? ? user = User.find_by_username(params[:user][:username]) : user = User.find_by_email(params[:user][:email])
+         if user && user.authenticate(params[:user][:password])
+            session[:user_id] = user.id
+            redirect to "/users/#{user.id}"
+         else
+            flash[:message] = "Invalid Credentials. Please try again."
+            redirect to '/signin'
+         end
+    end
 
     get '/users/:id' do
         @user = User.find_by_id(params[:id])
-        @comics = @user.comics
-        erb :'users/home'
+        if @user == current_user
+            @comics = @user.comics
+            erb :'users/home'
+        else
+            redirect to '/'
+        end
     end
 
     get '/logout' do

@@ -1,4 +1,12 @@
 <h2><%= @user.username %><br>
 <%= @user.email%></h2><br>
 <a href="/comics/new"> Create Comics </a><br>
-<a href="/comics"> My Comics </a>
+<a href="/comics"> All Comics </a><br>
+
+<h1>Your comic books</h1><br>
+
+<% if @comics %>
+<ul><% @comics.each do |c|%>
+<li><a href="/comics/<%=c.id%>"><%= c.title %></a></li>
+<% end %><ul>
+<% end %>

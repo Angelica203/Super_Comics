@@ -7,15 +7,14 @@ class ComicsController < ApplicationController
     end
 
     get '/comics/new' do
-        #new
-    #get form to create new comics
-        # redirect_if_not_logged_in
+    #    if !logged_in?
+    #     redirect '/' 
+    #    else
         erb :'comics/new'
+    #    end
     end
 
     post '/comics' do
-        #create(backend)
-    #create a new comicbook and redirect
     redirect_if_not_logged_in
     comic = Comic.new(params[:comic])
     comic.user_id=current_user.id

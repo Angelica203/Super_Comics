@@ -10,6 +10,8 @@
         <% if logged_in? %>
           <a href="/logout">Log out</a>
           <a href="/users/<%=current_user.id%>">Home</a>
+          <%else%>
+          <a href="/">Signup/Login</a>
         <% end %>
         <h1>Super Comics</h1>
         <%= yield %>
