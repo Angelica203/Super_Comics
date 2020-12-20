@@ -7,9 +7,6 @@ class ComicsController < ApplicationController
     end
 
     get '/comics/new' do
-    #    if !logged_in?
-    #     redirect '/' 
-    #    else
         erb :'comics/new'
     #    end
     end
@@ -36,23 +33,25 @@ class ComicsController < ApplicationController
         erb :'comics/edit'
     end
 
+    # def redirect_if_not_logged_in
+    #     flash[:message] = "Please log in before continuing!"
+    #     redirect to '/signin' if !logged_in?
+    # end
+
+
     patch '/comics/:id' do
-        #update
-        #update the single comic
-        # comic = Comic.find_by_id(params[:id])
-        # redirect to
         redirect_if_not_logged_in
-        comic = Comic.find_by_id(params[:id])
-        comic.update(params[:comic])
-        redirect to "/comics/#{comic.id}"
+        @comic = Comic.find_by_id(params[:id])
+        @comic.update(params[:comic])
+        redirect to "/comics/#{@comic.id}"
     end
 
     delete '/comics/:id' do
         #delete or destroy
         #destroy the single comic
         redirect_if_not_logged_in
-        comic = Comic.find_by_id(params[:id])
-        comic.destroy
+        @comic = Comic.find_by_id(params[:id])
+        @comic.destroy
         redirect to '/comics'
     end
 end
